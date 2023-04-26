@@ -16,6 +16,7 @@ const Home = () => {
       />
       <View style={styles.socialButtonsContainer}>
         <CustomButton
+          facebookIconStyle={styles.facebookIcon}
           color="white"
           title="Login with Facebook"
           icon={require('../assets/facebook.png')}
@@ -28,11 +29,12 @@ const Home = () => {
           title="Or with Google"
           icon={require('../assets/google.png')}
           backgroundColor={colorsGuide.mediumRed}
-          iconSize={30}
+          iconSize={35}
           onPress={() => console.log('hello')}
         />
       </View>
       <CustomButton
+        style={styles.facebookIcon}
         color="white"
         title="Continue"
         icon={require('../assets/facebook.png')}
@@ -57,5 +59,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     width: '100%',
+  },
+  facebookIcon: {
+    marginBottom: 7,
   },
 });

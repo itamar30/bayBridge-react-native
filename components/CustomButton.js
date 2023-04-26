@@ -10,6 +10,7 @@ const CustomButton = ({
   iconSize,
   style,
   width,
+  facebookIconStyle,
   ...otherProps
 }) => {
   return (
@@ -17,7 +18,11 @@ const CustomButton = ({
       style={[styles.btnContainer, {backgroundColor, width}, style]}
       {...otherProps}>
       <Image
-        style={[styles.icon, {height: iconSize, width: iconSize}]}
+        style={[
+          styles.icon,
+          {height: iconSize, width: iconSize},
+          facebookIconStyle,
+        ]}
         source={icon}
       />
       <Text style={[styles.btnText, {color}]}>{title}</Text>
