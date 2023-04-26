@@ -1,12 +1,40 @@
-import {View, Text, StyleSheet} from 'react-native';
-import React from 'react';
+import {View, Text, StyleSheet, Button} from 'react-native';
+import React, {useEffect, useState} from 'react';
 import CustomButton from '../components/CustomButton';
 import colorsGuide from '../config/colorsGuide';
 import WelcomeItem from '../components/WelcomeItem';
 import {useNavigation} from '@react-navigation/native';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import auth from '@react-native-firebase/auth';
 
 const Home = () => {
   const navigation = useNavigation();
+  const [initializing, setInitializing] = useState(true);
+  const [user, setUser] = useState();
+  function onAuthStateChanged(user) {
+    setUser(user);
+    if (initializing) setInitializing(false);
+  }
+
+  useEffect(() => {
+    GoogleSignin.configure({
+      webClientId:
+        '983212679800-21t5mf5htn5q5shu2vcubrg01ijegamd.apps.googleusercontent.com',
+    });
+    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber; // unsubscribe on unmount
+  }, []);
+
+  const onGoogleButtonPress = async () => {
+    try {
+      await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
+      const {idToken} = await GoogleSignin.signIn();
+      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+      await auth().signInWithCredential(googleCredential);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -30,7 +58,11 @@ const Home = () => {
           icon={require('../assets/google.png')}
           backgroundColor={colorsGuide.mediumRed}
           iconSize={35}
-          onPress={() => console.log('hello')}
+          onPress={() =>
+            onGoogleButtonPress().then(() => {
+              navigation.navigate('MoviesList', user);
+            })
+          }
         />
       </View>
       <CustomButton

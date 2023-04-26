@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "983212679800",
+    "project_id": "baybridgereactnative-3c1bb",
+    "storage_bucket": "baybridgereactnative-3c1bb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:983212679800:android:21ae8541e7ecd15ea5838d",
+        "android_client_info": {
+          "package_name": "com.awesomeproject2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "983212679800-d7jbfkhp5726vq0dp5v5tftme1onq76n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.awesomeproject2",
+            "certificate_hash": "6cbc9635caae3b1364c0dae8eebb8a24b0922b38"
+          }
+        },
+        {
+          "client_id": "983212679800-o8kdkbfv965hl2cb5br07h1kj0dambgd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.awesomeproject2",
+            "certificate_hash": "58ec051fc86acfba23af6c9edd4636357e7968b3"
+          }
+        },
+        {
+          "client_id": "983212679800-8a04ok4nfd1sk990rcunu4ibkk42ohtc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVN4UNyJuQHfB67hFwY9sB433OgLCnUAY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "983212679800-21t5mf5htn5q5shu2vcubrg01ijegamd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -6,7 +6,7 @@ import MovieItem from '../components/MovieItem';
 import axios from 'axios';
 import {useNavigation} from '@react-navigation/native';
 
-const MoviesList = () => {
+const MoviesList = ({route}) => {
   const navigation = useNavigation();
 
   const [allMovies, setallMovies] = useState([]);
@@ -43,6 +43,7 @@ const MoviesList = () => {
     <View style={[styles.container, {paddingTop: !moviesFetchFlag ? 300 : 40}]}>
       {!moviesFetchFlag && (
         <View style={styles.buttonContainer}>
+          <Text style={styles.username}>{route?.params?.email}</Text>
           <CustomButton
             style={{borderColor: colorsGuide.white, borderWidth: 1}}
             width={200}
@@ -81,5 +82,9 @@ const styles = StyleSheet.create({
   buttonContainer: {
     width: '100%',
     alignItems: 'center',
+  },
+  username: {
+    fontSize: 40,
+    backgroundColor: 'white',
   },
 });
