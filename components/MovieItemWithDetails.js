@@ -9,21 +9,21 @@ import {
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import colorsGuide from '../config/colorsGuide';
-//   import { useSelector, useDispatch } from "react-redux";
-//   import {
-//     addFavorite,
-//     clearFavorites,
-//     removeFavorite,
-//   } from "../store/favoritesSlice";
+import {useSelector, useDispatch} from 'react-redux';
+import {
+  addFavorite,
+  clearFavorites,
+  removeFavorite,
+} from '../store/favoritesSlice';
 import {useNavigation} from '@react-navigation/native';
 
 const MovieItemWithDetails = ({id, name, poster, desc, raiting}) => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigation();
   const starArr = [];
   const raitingFloor = Math.floor(raiting);
-  // const ids = useSelector(state => state.favorites.ids);
-  // const isMovieFavorite = ids.indexOf(id) !== -1;
+  const ids = useSelector(state => state.favorites.ids);
+  const isMovieFavorite = ids.indexOf(id) !== -1;
 
   for (let i = 0; i < raitingFloor; i++) {
     starArr.push(0);
@@ -61,38 +61,44 @@ const MovieItemWithDetails = ({id, name, poster, desc, raiting}) => {
               uri: poster,
             }}
           />
-          {/* {!isMovieFavorite ? (
+          {!isMovieFavorite ? (
             <TouchableOpacity
               style={styles.favContainer}
               onPress={() => {
                 {
                   ids?.length === 0 &&
-                    Alert.alert("Press Cart Icon To See Favorites Movies");
+                    Alert.alert('Press Cart Icon To See Favorites Movies');
                 }
                 dispatch(addFavorite(id));
-               }}
-            >
-              <Entypo name="plus" size={45} color="white" />
+              }}>
+              <Image
+                source={require('../assets/plus.png')}
+                style={styles.plusAndMinusIcons}
+              />
             </TouchableOpacity>
           ) : (
             <TouchableOpacity
               style={styles.favContainer}
-              // onPress={() => dispatch(removeFavorite(id))}
-            >
-              <Entypo name="minus" size={45} color="white" />
+              onPress={() => dispatch(removeFavorite(id))}>
+              <Image
+                source={require('../assets/minus.png')}
+                style={styles.plusAndMinusIcons}
+              />
             </TouchableOpacity>
-          )} */}
+          )}
           <View style={styles.badgeContainer}>
             <View style={styles.numOfFavoriteCircle}>
               <Text style={styles.favoritesNumber}>
-                {/* {`${ids?.length || 0}`} */}
+                {`${ids?.length || 0}`}
               </Text>
             </View>
             <TouchableOpacity
               style={styles.shoppingCartBadgeContainer}
-              // onPress={() => navigate.navigate("Favorites")}
-            >
-              {/* <FontAwesome5 name="shopping-cart" size={30} color="white" /> */}
+              onPress={() => navigate.navigate('Favorites')}>
+              <Image
+                source={require('../assets/cart.png')}
+                style={styles.cartIcon}
+              />
             </TouchableOpacity>
           </View>
         </View>
@@ -214,7 +220,15 @@ const styles = StyleSheet.create({
     width: 30,
   },
   plusAndMinusIcons: {
-    height: 45,
-    width: 45,
+    height: 42,
+    width: 42,
+    backgroundColor: 'white',
+    borderRadius: 21,
+  },
+  cartIcon: {
+    height: 35,
+    width: 35,
+    backgroundColor: 'white',
+    borderRadius: 25,
   },
 });

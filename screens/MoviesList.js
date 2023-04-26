@@ -50,7 +50,7 @@ const MoviesList = () => {
             title="Movies List"
             icon={require('../assets/list.png')}
             backgroundColor={colorsGuide.black}
-            iconSize={25}
+            iconSize={35}
             onPress={getAllMovies}
           />
         </View>

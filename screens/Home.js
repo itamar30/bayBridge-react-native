@@ -20,7 +20,7 @@ const Home = () => {
           title="Login with Facebook"
           icon={require('../assets/facebook.png')}
           backgroundColor={colorsGuide.mediumBlue}
-          iconSize={25}
+          iconSize={30}
           onPress={() => console.log('hello')}
         />
         <CustomButton
@@ -28,7 +28,7 @@ const Home = () => {
           title="Or with Google"
           icon={require('../assets/google.png')}
           backgroundColor={colorsGuide.mediumRed}
-          iconSize={20}
+          iconSize={30}
           onPress={() => console.log('hello')}
         />
       </View>
@@ -37,7 +37,7 @@ const Home = () => {
         title="Continue"
         icon={require('../assets/facebook.png')}
         backgroundColor={colorsGuide.black}
-        iconSize={20}
+        iconSize={30}
         onPress={() => navigation.navigate('MoviesList')}
       />
     </View>
