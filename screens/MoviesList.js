@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet, FlatList} from 'react-native';
+import {View, Text, StyleSheet, FlatList, Image, TextInput} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import colorsGuide from '../config/colorsGuide';
 import CustomButton from '../components/CustomButton';
@@ -8,9 +8,10 @@ import {useNavigation} from '@react-navigation/native';
 
 const MoviesList = ({route}) => {
   const navigation = useNavigation();
-  const email = route?.params?.email;
   const [allMovies, setallMovies] = useState([]);
+  const [filteredMovies, setFilterdMovies] = useState([]);
   const [moviesFetchFlag, setmMviesFetchFlag] = useState(false);
+  const [isSearchEmpty, setisSearchEmpty] = useState(true);
 
   const getAllMovies = async ({route}) => {
     const res = await axios(
@@ -20,13 +21,13 @@ const MoviesList = ({route}) => {
     setmMviesFetchFlag(true);
   };
 
-  useEffect(() => {}, [moviesFetchFlag, email]);
+  useEffect(() => {}, [route.params.name]);
 
   const renderItem = ({item}) => {
     return (
       <MovieItem
         key={item.id}
-        name={item?.original_title}
+        name={capital_letter(item?.original_title)}
         poster={`https://image.tmdb.org/t/p/original${item?.poster_path}`}
         onPress={() => {
           navigation.navigate('MovieDetails', fintMovieById(item?.id));
@@ -39,11 +40,46 @@ const MoviesList = ({route}) => {
     return allMovies.filter(item => item?.id === id);
   };
 
+  const capital_letter = str => {
+    str = str?.split(' ');
+    for (var i = 0, x = str.length; i < x; i++) {
+      let first = str[i][0]?.toUpperCase();
+      let rest = str[i]?.substr(1);
+      if (first == undefined) {
+        str[i] = rest;
+      }
+      if (rest === undefined) {
+        str[i] = first;
+      }
+      if (first !== undefined && rest !== undefined) {
+        str[i] = first + rest;
+      }
+    }
+    return str.join(' ');
+  };
+
+  const HandleonChangeText = e => {
+    if (e !== '') {
+      setisSearchEmpty(false);
+    } else {
+      setisSearchEmpty(true);
+    }
+    setFilterdMovies(
+      allMovies.filter(m => m?.original_title?.includes(capital_letter(e))),
+    );
+  };
+
   return (
-    <View style={[styles.container, {paddingTop: !moviesFetchFlag ? 300 : 40}]}>
+    <View style={[styles.container, {paddingTop: !moviesFetchFlag ? 100 : 40}]}>
       {!moviesFetchFlag && (
         <View style={styles.buttonContainer}>
-          {email && <Text style={styles.username}>Hello {email}</Text>}
+          <Text style={styles.username}>Logged as {route.params.name}</Text>
+          {route.params.image && (
+            <Image
+              style={[styles.facebookImg, {marginVertical: 30}]}
+              source={{uri: route.params.image}}
+            />
+          )}
           <CustomButton
             style={{borderColor: colorsGuide.white, borderWidth: 1}}
             width={200}
@@ -56,13 +92,39 @@ const MoviesList = ({route}) => {
           />
         </View>
       )}
-      <FlatList
-        contentContainerStyle={{alignItems: 'center'}}
-        data={allMovies}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-        numColumns={2}
-      />
+      {moviesFetchFlag && (
+        <TextInput
+          placeholder="Serach Movie .."
+          placeholderTextColor={colorsGuide.yellow}
+          style={styles.searchBar}
+          onChangeText={e => HandleonChangeText(e)}
+        />
+      )}
+
+      {filteredMovies?.length > 0 && !isSearchEmpty && (
+        <FlatList
+          contentContainerStyle={{alignItems: 'center'}}
+          data={filteredMovies}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+          numColumns={2}
+        />
+      )}
+      {filteredMovies?.length === 0 && !isSearchEmpty && (
+        <View>
+          <Text style={styles.noResult}>No Results Try Search Again ..</Text>
+        </View>
+      )}
+
+      {isSearchEmpty && (
+        <FlatList
+          contentContainerStyle={{alignItems: 'center'}}
+          data={allMovies}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+          numColumns={2}
+        />
+      )}
     </View>
   );
 };
@@ -89,5 +151,28 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: 'gray',
     marginBottom: 20,
+  },
+  facebookImg: {
+    height: 200,
+    width: 200,
+    borderRadius: 100,
+  },
+  searchBar: {
+    height: 60,
+    width: '80%',
+    color: colorsGuide.white,
+    backgroundColor: colorsGuide.blackWithOpacity,
+    borderWidth: 1,
+    borderColor: colorsGuide.white,
+    borderRadius: 20,
+    fontSize: 28,
+    marginVertical: 30,
+    alignSelf: 'center',
+    textAlign: 'center',
+  },
+  noResult: {
+    fontSize: 25,
+    color: colorsGuide.white,
+    textAlign: 'center',
   },
 });
