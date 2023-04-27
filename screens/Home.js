@@ -22,8 +22,8 @@ const Home = () => {
         '983212679800-21t5mf5htn5q5shu2vcubrg01ijegamd.apps.googleusercontent.com',
     });
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-    return subscriber; // unsubscribe on unmount
-  }, []);
+    return subscriber;
+  }, [user]);
 
   const onGoogleButtonPress = async () => {
     try {
@@ -59,9 +59,9 @@ const Home = () => {
           backgroundColor={colorsGuide.mediumRed}
           iconSize={35}
           onPress={() =>
-            onGoogleButtonPress().then(() => {
-              navigation.navigate('MoviesList', user);
-            })
+            onGoogleButtonPress().then(() =>
+              navigation.navigate('MoviesList', {email: user?.email}),
+            )
           }
         />
       </View>

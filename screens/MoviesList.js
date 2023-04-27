@@ -8,11 +8,11 @@ import {useNavigation} from '@react-navigation/native';
 
 const MoviesList = ({route}) => {
   const navigation = useNavigation();
-
+  const email = route?.params?.email;
   const [allMovies, setallMovies] = useState([]);
   const [moviesFetchFlag, setmMviesFetchFlag] = useState(false);
 
-  const getAllMovies = async () => {
+  const getAllMovies = async ({route}) => {
     const res = await axios(
       'https://api.themoviedb.org/3/movie/popular?api_key=247082c0fd9674d69377c506d2b38e04&amp;amp;language=en-US&amp;amp;page=1',
     );
@@ -20,7 +20,7 @@ const MoviesList = ({route}) => {
     setmMviesFetchFlag(true);
   };
 
-  useEffect(() => {}, [moviesFetchFlag]);
+  useEffect(() => {}, [moviesFetchFlag, email]);
 
   const renderItem = ({item}) => {
     return (
@@ -43,7 +43,7 @@ const MoviesList = ({route}) => {
     <View style={[styles.container, {paddingTop: !moviesFetchFlag ? 300 : 40}]}>
       {!moviesFetchFlag && (
         <View style={styles.buttonContainer}>
-          <Text style={styles.username}>{route?.params?.email}</Text>
+          {email && <Text style={styles.username}>Hello {email}</Text>}
           <CustomButton
             style={{borderColor: colorsGuide.white, borderWidth: 1}}
             width={200}
@@ -84,7 +84,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   username: {
-    fontSize: 40,
-    backgroundColor: 'white',
+    fontSize: 25,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: 'gray',
+    marginBottom: 20,
   },
 });
