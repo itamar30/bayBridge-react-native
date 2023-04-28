@@ -11,35 +11,32 @@ import { Provider } from "react-redux";
 
 const Stack = createNativeStackNavigator();
 
-
-
-
 const App = () => {
   return (
     <Provider store={store}>
     <NavigationContainer>
     <Stack.Navigator>
-      <Stack.Screen
-        name="Home"
-        component={Home}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="MoviesList"
-        component={MoviesList}
-        options={{ headerShown: false }}
-      />
     <Stack.Screen
-            name="MovieDetails"
-            component={MovieDetails}
-            options={{ headerShown: false }}
-          />
-           <Stack.Screen
-            name="Favorites"
-            component={Favorites}
-            options={{ headerShown: false }}
-          />
-    </Stack.Navigator>
+    name="Home"
+    component={Home}
+    options={{ headerShown: false }}
+    />
+    <Stack.Screen
+    name="MoviesList"
+    component={MoviesList}
+    options={{ headerShown: false }}
+    />
+    <Stack.Screen
+    name="MovieDetails"
+    component={MovieDetails}
+    options={{ headerShown: false }}
+    />
+    <Stack.Screen
+     name="Favorites"
+     component={Favorites}
+     options={{ headerShown: false }}
+   />
+  </Stack.Navigator>
   </NavigationContainer>
   </Provider>
 

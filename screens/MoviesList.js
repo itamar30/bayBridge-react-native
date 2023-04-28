@@ -21,7 +21,7 @@ const MoviesList = ({route}) => {
     setmMviesFetchFlag(true);
   };
 
-  useEffect(() => {}, [route.params.name]);
+  useEffect(() => {}, [route.params?.name]);
 
   const renderItem = ({item}) => {
     return (
@@ -74,10 +74,15 @@ const MoviesList = ({route}) => {
       {!moviesFetchFlag && (
         <View style={styles.buttonContainer}>
           <Text style={styles.username}>Logged as {route.params.name}</Text>
-          {route.params.image && (
+          {route.params.image ? (
             <Image
               style={[styles.facebookImg, {marginVertical: 30}]}
               source={{uri: route.params.image}}
+            />
+          ) : (
+            <Image
+              style={[styles.facebookImg, {marginVertical: 30}]}
+              source={require('../assets/googleUser.png')}
             />
           )}
           <CustomButton
@@ -95,7 +100,7 @@ const MoviesList = ({route}) => {
       {moviesFetchFlag && (
         <TextInput
           placeholder="Serach Movie .."
-          placeholderTextColor={colorsGuide.yellow}
+          placeholderTextColor={'gray'}
           style={styles.searchBar}
           onChangeText={e => HandleonChangeText(e)}
         />

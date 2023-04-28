@@ -65,17 +65,33 @@ const Home = () => {
     }
   };
 
+  const googleSignOut = () => {
+    setIsGoogle(false);
+    return auth().signOut();
+  };
+
+  const facebookSignOut = () => {
+    setIsFacebook(false);
+    return auth().signOut();
+  };
+
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        {backgroundColor: user ? colorsGuide.black : colorsGuide.white},
+      ]}>
       <WelcomeItem
-        title={name ? `Welcome ${name}` : `Welcome Stranger`}
+        title={user ? `Welcome ${user?.displayName}` : `Welcome Stranger`}
+        color={user ? 'gray' : user && colorsGuide.black}
         desc="Please login to continue to the awesomeness"
+        fontSize={user ? 30 : 40}
         image={image}
         isGoogle={isGoogle}
         isFaceBook={isFacebook}
       />
-      <View style={styles.socialButtonsContainer}>
-        {!isFacebook && (
+      {!user && (
+        <View style={styles.socialButtonsContainer}>
           <CustomButton
             facebookIconStyle={styles.facebookIcon}
             color="white"
@@ -89,20 +105,17 @@ const Home = () => {
                   setName(res.additionalUserInfo.profile.name);
                   setImage(res.additionalUserInfo.profile.picture.data.url);
                   setIsFacebook(true);
-                  setIsGoogle(false);
                   navigation.navigate('MoviesList', {
                     name: res.additionalUserInfo.profile.name,
-                    image: res.additionalUserInfo.profile.picture.data.url,
+                    image: res?.additionalUserInfo?.profile?.picture?.data?.url,
                   });
                 })
                 .catch(error => console.log(error))
             }
           />
-        )}
-        {!isGoogle && (
           <CustomButton
             color="white"
-            title={isFacebook ? 'Login with Google' : 'Or with Google'}
+            title={'Or with Google'}
             icon={require('../assets/google.png')}
             backgroundColor={colorsGuide.mediumRed}
             iconSize={35}
@@ -110,16 +123,31 @@ const Home = () => {
               onGoogleButtonPress().then(user => {
                 setName(user.additionalUserInfo.profile.name);
                 setIsGoogle(true);
-                setIsFacebook(false);
-                setImage(undefined);
                 navigation.navigate('MoviesList', {
                   name: user.additionalUserInfo.profile.name,
                 });
               })
             }
           />
-        )}
-      </View>
+        </View>
+      )}
+      {user && (
+        <CustomButton
+          width={150}
+          color="white"
+          title={'Sign Out'}
+          icon={
+            isGoogle
+              ? require('../assets/google.png')
+              : require('../assets/facebook.png')
+          }
+          backgroundColor={
+            isGoogle ? colorsGuide.mediumRed : colorsGuide.mediumBlue
+          }
+          iconSize={isGoogle ? 35 : 20}
+          onPress={isGoogle ? googleSignOut : facebookSignOut}
+        />
+      )}
     </View>
   );
 };

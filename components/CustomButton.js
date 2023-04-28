@@ -51,4 +51,9 @@ const styles = StyleSheet.create({
   icon: {
     marginRight: 10,
   },
+  faceBookIcon: {
+    marginBottom: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
