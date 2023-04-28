@@ -86,8 +86,11 @@ const MoviesList = ({route}) => {
             />
           )}
           <CustomButton
-            style={{borderColor: colorsGuide.white, borderWidth: 1}}
-            width={200}
+            style={{
+              borderColor: colorsGuide.white,
+              borderWidth: 1,
+              paddingHorizontal: 20,
+            }}
             color="white"
             title="Movies List"
             icon={require('../assets/list.png')}
@@ -144,23 +147,23 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    fontSize: 30,
+    fontSize: 10,
   },
   buttonContainer: {
     width: '100%',
     alignItems: 'center',
   },
   username: {
-    fontSize: 25,
+    fontSize: 15,
     fontWeight: 'bold',
     textAlign: 'center',
     color: 'gray',
     marginBottom: 20,
   },
   facebookImg: {
-    height: 200,
-    width: 200,
-    borderRadius: 100,
+    height: 100,
+    width: 100,
+    borderRadius: 50,
   },
   searchBar: {
     height: 60,
@@ -170,13 +173,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colorsGuide.white,
     borderRadius: 20,
-    fontSize: 28,
+    fontSize: 10,
     marginVertical: 30,
     alignSelf: 'center',
     textAlign: 'center',
   },
   noResult: {
-    fontSize: 25,
+    fontSize: 20,
     color: colorsGuide.white,
     textAlign: 'center',
   },

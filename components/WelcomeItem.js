@@ -13,7 +13,7 @@ const WelcomeItem = ({
   useEffect(() => {}, [isGoogle, isFaceBook]);
   return (
     <View style={styles.container}>
-      {<Text style={[styles.title, {color, fontSize}]}>{title}</Text>}
+      {<Text style={[styles.title, {color}]}>{title}</Text>}
       {!isFaceBook && !isGoogle && (
         <Image
           style={styles.strangerImage}
@@ -38,23 +38,29 @@ const styles = StyleSheet.create({
   container: {
     flex: 0.7,
     alignItems: 'center',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-around',
     width: '100%',
   },
   title: {
-    fontSize: 40,
+    fontSize: 30,
+    marginVertical: 3,
   },
   img: {
-    height: 200,
-    width: 200,
-    borderRadius: 100,
+    height: 150,
+    width: 150,
+    borderRadius: 75,
+    marginVertical: 3,
   },
   desc: {
     fontSize: 20,
-    width: '70%',
+    width: '90%',
+    textAlign: 'center',
+    marginVertical: 3,
   },
   strangerImage: {
-    height: 200,
-    width: 200,
+    height: 150,
+    width: 150,
+    borderRadius: 75,
+    marginVertical: 3,
   },
 });

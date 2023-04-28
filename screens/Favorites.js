@@ -63,6 +63,8 @@ const Favorites = ({navigation}) => {
               style={{
                 borderWidth: 1,
                 borderColor: colorsGuide.black,
+                marginRight: 10,
+                paddingHorizontal: 10,
               }}
               color={colorsGuide.black}
               title="Go Home"
@@ -73,12 +75,17 @@ const Favorites = ({navigation}) => {
             />
             <CustomButton
               color="white"
-              title="Go To Movies List"
+              title="Movies List"
               icon={require('../assets/list.png')}
               backgroundColor={colorsGuide.blackWithOpacity}
               iconSize={30}
               onPress={() => navigation.navigate('MoviesList')}
-              style={{borderColor: colorsGuide.white, borderWidth: 1}}
+              style={{
+                borderColor: colorsGuide.white,
+                borderWidth: 1,
+                paddingHorizontal: 13,
+                marginHorizontal: 7,
+              }}
             />
           </View>
         </>
@@ -92,13 +99,13 @@ export default Favorites;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colorsGuide.black,
-    paddingTop: 80,
-    minHeight: '100%',
+    paddingTop: 30,
+    height: '100%',
     alignItems: 'center',
     justifyContent: 'center',
   },
   text: {
-    fontSize: 40,
+    fontSize: 15,
     fontWeight: 'bold',
     textAlign: 'center',
     color: 'gray',
@@ -106,9 +113,10 @@ const styles = StyleSheet.create({
   },
   buttonsContainer: {
     flexDirection: 'row',
-    width: '85%',
-    paddingVertical: 40,
+    width: '100%',
+    paddingHorizontal: 40,
     display: 'flex',
-    justifyContent: 'space-between',
+    alignSelf: 'center',
+    justifyContent: 'center',
   },
 });

@@ -17,6 +17,7 @@ const CustomButton = ({
     <TouchableOpacity
       style={[styles.btnContainer, {backgroundColor, width}, style]}
       {...otherProps}>
+      <Text style={[styles.btnText, {color}]}>{title}</Text>
       <Image
         style={[
           styles.icon,
@@ -25,7 +26,6 @@ const CustomButton = ({
         ]}
         source={icon}
       />
-      <Text style={[styles.btnText, {color}]}>{title}</Text>
     </TouchableOpacity>
   );
 };
@@ -37,22 +37,22 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     alignItems: 'center',
     marginVertical: 15,
-    paddingHorizontal: 7,
-    paddingVertical: 16,
     flexDirection: 'row',
     borderRadius: 10,
+    paddingVertical: 15,
+    paddingHorizontal: 5,
   },
 
   btnText: {
-    fontSize: 18,
+    fontSize: 12,
     fontWeight: 'bold',
     color: colorsGuide.white,
   },
   icon: {
-    marginRight: 10,
+    marginLeft: 10,
   },
   faceBookIcon: {
-    marginBottom: 15,
+    marginBottom: 10,
     justifyContent: 'center',
     alignItems: 'center',
   },

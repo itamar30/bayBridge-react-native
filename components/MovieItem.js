@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
   img: {
-    height: 200,
+    height: 250,
     width: 140,
     resizeMode: 'cover',
     position: 'relative',
@@ -40,12 +40,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     bottom: 0,
     width: '100%',
-    height: '25%',
     textAlign: 'center',
+    padding: 15,
   },
   title: {
     color: 'white',
-    padding: 6,
     textAlign: 'center',
+    fontSize: 10,
+    paddingBottom: 3,
   },
 });

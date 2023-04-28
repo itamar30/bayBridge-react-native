@@ -61,45 +61,47 @@ const MovieItemWithDetails = ({id, name, poster, desc, raiting}) => {
               uri: poster,
             }}
           />
-          {!isMovieFavorite ? (
-            <TouchableOpacity
-              style={styles.favContainer}
-              onPress={() => {
-                {
-                  ids?.length === 0 &&
-                    Alert.alert('Press Cart Icon To See Favorites Movies');
-                }
-                dispatch(addFavorite(id));
-              }}>
-              <Image
-                source={require('../assets/plus.png')}
-                style={styles.plusAndMinusIcons}
-              />
-            </TouchableOpacity>
-          ) : (
-            <TouchableOpacity
-              style={styles.favContainer}
-              onPress={() => dispatch(removeFavorite(id))}>
-              <Image
-                source={require('../assets/minus.png')}
-                style={styles.plusAndMinusIcons}
-              />
-            </TouchableOpacity>
-          )}
-          <View style={styles.badgeContainer}>
-            <View style={styles.numOfFavoriteCircle}>
-              <Text style={styles.favoritesNumber}>
-                {`${ids?.length || 0}`}
-              </Text>
+          <View style={styles.iconsContainer}>
+            {!isMovieFavorite ? (
+              <TouchableOpacity
+                style={styles.favContainer}
+                onPress={() => {
+                  {
+                    ids?.length === 0 &&
+                      Alert.alert('Press Cart Icon To See Favorites Movies');
+                  }
+                  dispatch(addFavorite(id));
+                }}>
+                <Image
+                  source={require('../assets/plus.png')}
+                  style={styles.plusAndMinusIcons}
+                />
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity
+                style={styles.favContainer}
+                onPress={() => dispatch(removeFavorite(id))}>
+                <Image
+                  source={require('../assets/minus.png')}
+                  style={styles.plusAndMinusIcons}
+                />
+              </TouchableOpacity>
+            )}
+            <View style={styles.badgeContainer}>
+              <View style={styles.numOfFavoriteCircle}>
+                <Text style={styles.favoritesNumber}>
+                  {`${ids?.length || 0}`}
+                </Text>
+              </View>
+              <TouchableOpacity
+                style={styles.shoppingCartBadgeContainer}
+                onPress={() => navigate.navigate('Favorites')}>
+                <Image
+                  source={require('../assets/cart.png')}
+                  style={styles.cartIcon}
+                />
+              </TouchableOpacity>
             </View>
-            <TouchableOpacity
-              style={styles.shoppingCartBadgeContainer}
-              onPress={() => navigate.navigate('Favorites')}>
-              <Image
-                source={require('../assets/cart.png')}
-                style={styles.cartIcon}
-              />
-            </TouchableOpacity>
           </View>
         </View>
       </View>
@@ -121,10 +123,11 @@ const styles = StyleSheet.create({
     borderColor: colorsGuide.black,
     borderWidth: 1,
     position: 'relative',
-    height: '90%',
     width: '80%',
+    height: '100%',
     borderRadius: 30,
     overflow: 'hidden',
+    padding: 7,
   },
   img: {
     height: '100%',
@@ -136,6 +139,8 @@ const styles = StyleSheet.create({
   startsContainer: {
     flexDirection: 'row',
     zIndex: 2,
+    paddingVertical: 10,
+    paddingBottom: 10,
   },
   raitingText: {
     fontSize: 30,
@@ -143,7 +148,7 @@ const styles = StyleSheet.create({
   },
   name: {
     zIndex: 2,
-    fontSize: 30,
+    fontSize: 15,
     fontWeight: 'bold',
     color: colorsGuide.white,
     textAlign: 'center',
@@ -152,9 +157,9 @@ const styles = StyleSheet.create({
   desc: {
     zIndex: 2,
     textAlign: 'center',
-    fontSize: 15,
+    fontSize: 10,
     color: colorsGuide.white,
-    marginBottom: 10,
+    paddingVertical: 10,
   },
   infoContainer: {
     alignItems: 'center',
@@ -168,8 +173,8 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   favContainer: {
-    height: 60,
-    width: 60,
+    height: 30,
+    width: 30,
     position: 'absolute',
     top: 25,
     right: 15,
@@ -180,8 +185,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   shoppingCartBadgeContainer: {
-    height: 60,
-    width: 60,
+    height: 30,
+    width: 30,
     position: 'absolute',
     top: 25,
     left: 15,
@@ -198,37 +203,46 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   numOfFavoriteCircle: {
-    height: 40,
-    width: 40,
+    height: 30,
+    width: 30,
     position: 'absolute',
     top: 0,
-    right: 0,
+    left: 0,
     backgroundColor: colorsGuide.blackWithOpacity,
     zIndex: 3,
-    borderRadius: 25,
+    borderRadius: 15,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
   },
   favoritesNumber: {
-    fontSize: 25,
+    fontSize: 10,
     color: colorsGuide.white,
     fontWeight: 'bold',
   },
   starIcon: {
-    height: 30,
-    width: 30,
+    height: 15,
+    width: 15,
   },
   plusAndMinusIcons: {
-    height: 42,
-    width: 42,
+    height: 40,
+    width: 40,
     backgroundColor: 'white',
-    borderRadius: 21,
+    borderRadius: 20,
   },
   cartIcon: {
-    height: 35,
-    width: 35,
+    height: 40,
+    width: 40,
     backgroundColor: 'white',
-    borderRadius: 25,
+    borderRadius: 20,
+  },
+  iconsContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    position: 'relative',
+    width: '90%',
+    paddingHorizontal: 10,
+    alignSelf: 'center',
+    marginTop: 7,
   },
 });
